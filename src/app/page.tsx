@@ -32,46 +32,46 @@ const imgGoogleGLogo1 = "https://www.figma.com/api/mcp/asset/03fbf42f-e53e-481b-
 const imgNounStar496059211 = "https://www.figma.com/api/mcp/asset/46f8af3b-cccb-4f02-9ce8-8c55a2e5b396";
 const imgUnion = "https://www.figma.com/api/mcp/asset/fcafc4c7-aa6a-4bf8-b0ad-998175b77335";
 
-// Listing data with marker positions
+// Listing data with marker positions (responsive)
 const listings = [
   {
     id: 1,
     image: imgImage16,
     title: "Price adjustment notification sent to 847 buyers",
     time: "2 hours ago",
-    markerPosition: { left: 180, top: 280 },
+    markerPosition: { left: "30%", top: "40%" },
   },
   {
     id: 2,
     image: imgImage17,
     title: "Showing scheduled at 456 Mountain Ridge Ave",
     time: "Just now",
-    markerPosition: { left: 320, top: 220 },
+    markerPosition: { left: "55%", top: "30%" },
   },
   {
     id: 3,
     image: imgImage18,
     title: "Showing scheduled at 789 Sunset Blvd",
     time: "Just now",
-    markerPosition: { left: 120, top: 350 },
+    markerPosition: { left: "20%", top: "55%" },
   },
   {
     id: 4,
     image: imgImage19,
     title: "New listing at 321 Oak Street",
     time: "Just now",
-    markerPosition: { left: 250, top: 180 },
+    markerPosition: { left: "45%", top: "25%" },
   },
   {
     id: 5,
     image: imgImage18,
     title: "Open house at 555 Palm Drive",
     time: "Just now",
-    markerPosition: { left: 380, top: 320 },
+    markerPosition: { left: "70%", top: "50%" },
   },
 ];
 
-// Animated Text Component - reveals text with a clip animation
+// Animated Text Component
 function AnimatedHeading({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -80,10 +80,7 @@ function AnimatedHeading({ children, className, delay = 0 }: { children: React.R
 
     gsap.fromTo(
       textRef.current,
-      {
-        y: 100,
-        opacity: 0,
-      },
+      { y: 100, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -119,10 +116,7 @@ function FadeUp({ children, className, delay = 0, stagger = false }: { children:
 
     gsap.fromTo(
       targets,
-      {
-        y: 60,
-        opacity: 0,
-      },
+      { y: 60, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -155,10 +149,7 @@ function ScaleReveal({ children, className, delay = 0 }: { children: React.React
 
     gsap.fromTo(
       ref.current,
-      {
-        scale: 0.9,
-        opacity: 0,
-      },
+      { scale: 0.9, opacity: 0 },
       {
         scale: 1,
         opacity: 1,
@@ -190,10 +181,7 @@ function LineReveal({ className, delay = 0 }: { className?: string; delay?: numb
 
     gsap.fromTo(
       ref.current,
-      {
-        scaleX: 0,
-        transformOrigin: "left center",
-      },
+      { scaleX: 0, transformOrigin: "left center" },
       {
         scaleX: 1,
         duration: 1,
@@ -260,7 +248,7 @@ function StarRating() {
   return (
     <div className="flex gap-[4px]">
       {[...Array(5)].map((_, i) => (
-        <div key={i} className="relative w-[20px] h-[20px]">
+        <div key={i} className="relative w-[16px] h-[16px] md:w-[20px] md:h-[20px]">
           <Image src={imgNounStar496059211} alt="" fill className="object-contain" unoptimized />
         </div>
       ))}
@@ -278,95 +266,26 @@ interface ReviewCardProps {
 
 function ReviewCard({ name, date, avatar, review }: ReviewCardProps) {
   return (
-    <div className="bg-[#2b2b2b] border border-[#484848] rounded-[12px] p-[20px] w-[469px] flex flex-col gap-[11px] shrink-0 hover:border-[#666] transition-colors duration-300">
+    <div className="bg-[#2b2b2b] border border-[#484848] rounded-[12px] p-[16px] md:p-[20px] w-[300px] md:w-[469px] flex flex-col gap-[11px] shrink-0 hover:border-[#666] transition-colors duration-300">
       <div className="flex justify-between items-start w-full">
-        <div className="flex gap-[16px] items-center">
-          <div className="relative w-[48px] h-[48px] rounded-full overflow-hidden">
+        <div className="flex gap-[12px] md:gap-[16px] items-center">
+          <div className="relative w-[40px] h-[40px] md:w-[48px] md:h-[48px] rounded-full overflow-hidden">
             <Image src={avatar} alt={name} fill className="object-cover" unoptimized />
           </div>
-          <div className="flex flex-col gap-[2px] font-dm-sans font-medium text-[16px] text-white tracking-[0.48px]">
-            <p className="leading-[24px]">{name}</p>
-            <p className="leading-[24px] opacity-40">{date}</p>
+          <div className="flex flex-col gap-[2px] font-dm-sans font-medium text-[14px] md:text-[16px] text-white tracking-[0.48px]">
+            <p className="leading-[20px] md:leading-[24px]">{name}</p>
+            <p className="leading-[20px] md:leading-[24px] opacity-40 text-[12px] md:text-[16px]">{date}</p>
           </div>
         </div>
-        <div className="relative w-[24px] h-[24px]">
+        <div className="relative w-[20px] h-[20px] md:w-[24px] md:h-[24px]">
           <Image src={imgGoogleGLogo1} alt="Google" fill className="object-contain" unoptimized />
         </div>
       </div>
       <StarRating />
-      <p className="font-dm-sans font-normal text-[18px] text-white leading-[28px]">{review}</p>
-      <p className="font-dm-sans font-medium text-[16px] text-white opacity-40 tracking-[0.48px] leading-[24px] cursor-pointer hover:opacity-60 transition-opacity">
+      <p className="font-dm-sans font-normal text-[14px] md:text-[18px] text-white leading-[22px] md:leading-[28px]">{review}</p>
+      <p className="font-dm-sans font-medium text-[14px] md:text-[16px] text-white opacity-40 tracking-[0.48px] leading-[24px] cursor-pointer hover:opacity-60 transition-opacity">
         Read More
       </p>
-    </div>
-  );
-}
-
-// Property Card Component with hover animation
-interface PropertyCardProps {
-  image: string;
-  price: string;
-  address: string;
-  location: string;
-  badge: string;
-  index: number;
-}
-
-function PropertyCard({ image, price, address, location, badge, index }: PropertyCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    gsap.fromTo(
-      ref.current,
-      {
-        y: 80,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: (index % 3) * 0.1,
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top 90%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  }, [index]);
-
-  return (
-    <div ref={ref} className="flex flex-col gap-[24px] w-[calc((100%-60px)/3)] group cursor-pointer">
-      <div className="relative w-full aspect-[664/830] overflow-hidden rounded-[4px]">
-        <Image 
-          src={image} 
-          alt={address} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-105" 
-          unoptimized 
-        />
-        <div className="absolute top-[16px] right-[16px] bg-white border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[8px] py-[4px]">
-          <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] leading-[20px]">
-            Sold
-          </p>
-        </div>
-      </div>
-      <div className="flex flex-col gap-[12px] text-[#2b2b2b]">
-        <p className="font-geist font-medium text-[18px] leading-[28px]">{price}</p>
-        <p className="font-gilda text-[32px] leading-[40px] group-hover:text-[#555] transition-colors duration-300">{address}</p>
-        <p className="font-geist font-normal text-[14px] tracking-[1px] uppercase opacity-60 leading-[20px]">
-          {location}
-        </p>
-      </div>
-      <div className="border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[8px] py-[4px] w-fit">
-        <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] leading-[20px]">
-          {badge}
-        </p>
-      </div>
     </div>
   );
 }
@@ -439,7 +358,6 @@ function InfiniteCarousel() {
     const scrollContainer = scrollRef.current;
     const scrollWidth = scrollContainer.scrollWidth / 2;
     
-    // GSAP infinite scroll animation
     const tl = gsap.to(scrollContainer, {
       x: -scrollWidth,
       duration: 60,
@@ -447,7 +365,6 @@ function InfiniteCarousel() {
       repeat: -1,
     });
 
-    // Pause on hover
     scrollContainer.addEventListener("mouseenter", () => tl.pause());
     scrollContainer.addEventListener("mouseleave", () => tl.play());
 
@@ -458,8 +375,7 @@ function InfiniteCarousel() {
 
   return (
     <div className="w-full overflow-hidden">
-      <div ref={scrollRef} className="flex gap-[32px] w-fit">
-        {/* First set of cards */}
+      <div ref={scrollRef} className="flex gap-[16px] md:gap-[32px] w-fit">
         {reviews.map((review, index) => (
           <ReviewCard
             key={`first-${index}`}
@@ -469,7 +385,6 @@ function InfiniteCarousel() {
             review={review.review}
           />
         ))}
-        {/* Duplicate set for seamless loop */}
         {reviews.map((review, index) => (
           <ReviewCard
             key={`second-${index}`}
@@ -479,6 +394,72 @@ function InfiniteCarousel() {
             review={review.review}
           />
         ))}
+      </div>
+    </div>
+  );
+}
+
+// Property Card Component
+interface PropertyCardProps {
+  image: string;
+  price: string;
+  address: string;
+  location: string;
+  badge: string;
+  index: number;
+}
+
+function PropertyCard({ image, price, address, location, badge, index }: PropertyCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    gsap.fromTo(
+      ref.current,
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: (index % 3) * 0.1,
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, [index]);
+
+  return (
+    <div ref={ref} className="flex flex-col gap-[16px] md:gap-[24px] w-full md:w-[calc((100%-60px)/3)] group cursor-pointer">
+      <div className="relative w-full aspect-[664/830] overflow-hidden rounded-[4px]">
+        <Image 
+          src={image} 
+          alt={address} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-105" 
+          unoptimized 
+        />
+        <div className="absolute top-[12px] right-[12px] md:top-[16px] md:right-[16px] bg-white border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[8px] py-[4px]">
+          <p className="font-geist font-normal text-[12px] md:text-[14px] text-[#2b2b2b] tracking-[1px] leading-[20px]">
+            Sold
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col gap-[8px] md:gap-[12px] text-[#2b2b2b]">
+        <p className="font-geist font-medium text-[16px] md:text-[18px] leading-[24px] md:leading-[28px]">{price}</p>
+        <p className="font-gilda text-[24px] md:text-[32px] leading-[32px] md:leading-[40px] group-hover:text-[#555] transition-colors duration-300">{address}</p>
+        <p className="font-geist font-normal text-[12px] md:text-[14px] tracking-[1px] uppercase opacity-60 leading-[20px]">
+          {location}
+        </p>
+      </div>
+      <div className="border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[8px] py-[4px] w-fit">
+        <p className="font-geist font-normal text-[12px] md:text-[14px] text-[#2b2b2b] tracking-[1px] leading-[20px]">
+          {badge}
+        </p>
       </div>
     </div>
   );
@@ -497,24 +478,24 @@ function ActivityCard({ image, title, time, isSelected = false, onClick }: Activ
   return (
     <button
       onClick={onClick}
-      className={`flex gap-[20px] items-center p-[16px] rounded-[8px] w-full transition-all duration-300 cursor-pointer text-left ${
+      className={`flex gap-[12px] md:gap-[20px] items-center p-[12px] md:p-[16px] rounded-[8px] w-full transition-all duration-300 cursor-pointer text-left ${
         isSelected
           ? "bg-[#f4f1ea] border-2 border-white scale-[1.02]"
           : "border border-[rgba(255,255,255,0.15)] hover:border-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.05)]"
       }`}
     >
-      <div className="relative w-[85px] h-[64px] rounded-[6px] overflow-hidden shrink-0">
+      <div className="relative w-[60px] h-[45px] md:w-[85px] md:h-[64px] rounded-[6px] overflow-hidden shrink-0">
         <Image src={image} alt="" fill className="object-cover" unoptimized />
       </div>
-      <div className="flex flex-col gap-[4px] flex-1">
+      <div className="flex flex-col gap-[2px] md:gap-[4px] flex-1">
         <p
-          className={`font-geist font-medium text-[18px] leading-[28px] ${
+          className={`font-geist font-medium text-[14px] md:text-[18px] leading-[20px] md:leading-[28px] ${
             isSelected ? "text-[#2b2b2b]" : "text-white"
           }`}
         >
           {title}
         </p>
-        <p className="font-geist font-normal text-[14px] text-[#71706c] leading-[20px]">{time}</p>
+        <p className="font-geist font-normal text-[12px] md:text-[14px] text-[#71706c] leading-[16px] md:leading-[20px]">{time}</p>
       </div>
     </button>
   );
@@ -536,10 +517,7 @@ function StatCard({ label, value, badge, index }: StatCardProps) {
 
     gsap.fromTo(
       ref.current,
-      {
-        y: 50,
-        opacity: 0,
-      },
+      { y: 50, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -556,17 +534,17 @@ function StatCard({ label, value, badge, index }: StatCardProps) {
   }, [index]);
 
   return (
-    <div ref={ref} className="flex-1 flex flex-col gap-[20px]">
+    <div ref={ref} className="flex-1 flex flex-col gap-[12px] md:gap-[20px]">
       <AnimatedCounter 
         value={value} 
-        className="font-gilda text-[80px] text-[#2b2b2b] leading-[88px]" 
+        className="font-gilda text-[48px] md:text-[80px] text-[#2b2b2b] leading-[56px] md:leading-[88px]" 
       />
-      <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] uppercase leading-[20px]">
+      <p className="font-geist font-normal text-[12px] md:text-[14px] text-[#2b2b2b] tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
         {label}
       </p>
       <LineReveal className="w-[50px] h-px bg-[#2b2b2b]" delay={index * 0.1} />
       <div className="border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[8px] py-[4px] w-fit">
-        <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] leading-[20px] whitespace-nowrap">
+        <p className="font-geist font-normal text-[11px] md:text-[14px] text-[#2b2b2b] tracking-[1px] leading-[16px] md:leading-[20px] whitespace-nowrap">
           {badge}
         </p>
       </div>
@@ -590,10 +568,7 @@ function PerformanceStat({ label, value, badge, index }: PerformanceStatProps) {
 
     gsap.fromTo(
       ref.current,
-      {
-        y: 40,
-        opacity: 0,
-      },
+      { y: 40, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -610,16 +585,16 @@ function PerformanceStat({ label, value, badge, index }: PerformanceStatProps) {
   }, [index]);
 
   return (
-    <div ref={ref} className="flex-1 flex flex-col gap-[14px] items-center py-[46px] px-[8px] border border-[#d6d3cd]">
-      <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] uppercase text-center leading-[20px]">
+    <div ref={ref} className="flex-1 flex flex-col gap-[10px] md:gap-[14px] items-center py-[24px] md:py-[46px] px-[8px] border border-[#d6d3cd]">
+      <p className="font-geist font-normal text-[10px] md:text-[14px] text-[#2b2b2b] tracking-[1px] uppercase text-center leading-[14px] md:leading-[20px]">
         {label}
       </p>
       <AnimatedCounter 
         value={value} 
-        className="font-gilda text-[64px] text-[#2b2b2b] text-center leading-[64px]" 
+        className="font-gilda text-[32px] md:text-[64px] text-[#2b2b2b] text-center leading-[36px] md:leading-[64px]" 
       />
-      <div className="border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[8px] py-[4px]">
-        <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] leading-[20px] whitespace-nowrap">
+      <div className="border border-[rgba(43,43,43,0.15)] rounded-[19px] px-[6px] md:px-[8px] py-[4px]">
+        <p className="font-geist font-normal text-[9px] md:text-[14px] text-[#2b2b2b] tracking-[1px] leading-[12px] md:leading-[20px] whitespace-nowrap">
           {badge}
         </p>
       </div>
@@ -643,10 +618,7 @@ function SocialPlatformCard({ icon, name, value, index }: SocialPlatformCardProp
 
     gsap.fromTo(
       ref.current,
-      {
-        y: 30,
-        opacity: 0,
-      },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
@@ -663,12 +635,12 @@ function SocialPlatformCard({ icon, name, value, index }: SocialPlatformCardProp
   }, [index]);
 
   return (
-    <div ref={ref} className="flex-1 flex flex-col gap-[20px] p-[16px] px-[20px] border border-[rgba(43,43,43,0.15)] rounded-[8px] hover:border-[rgba(43,43,43,0.3)] transition-colors duration-300">
-      <div className="flex gap-[12px] items-center">
+    <div ref={ref} className="flex-1 flex flex-col gap-[12px] md:gap-[20px] p-[12px] md:p-[16px] md:px-[20px] border border-[rgba(43,43,43,0.15)] rounded-[8px] hover:border-[rgba(43,43,43,0.3)] transition-colors duration-300">
+      <div className="flex gap-[8px] md:gap-[12px] items-center">
         {icon}
-        <p className="font-geist font-normal text-[18px] text-black leading-[24px]">{name}</p>
+        <p className="font-geist font-normal text-[14px] md:text-[18px] text-black leading-[20px] md:leading-[24px]">{name}</p>
       </div>
-      <p className="font-gilda text-[32px] text-[#2b2b2b] leading-[40px]">{value}</p>
+      <p className="font-gilda text-[24px] md:text-[32px] text-[#2b2b2b] leading-[28px] md:leading-[40px]">{value}</p>
     </div>
   );
 }
@@ -676,54 +648,35 @@ function SocialPlatformCard({ icon, name, value, index }: SocialPlatformCardProp
 // Map Marker Component
 interface MapMarkerProps {
   isActive: boolean;
-  position: { left: number; top: number };
+  position: { left: string; top: string };
 }
 
 function MapMarker({ isActive, position }: MapMarkerProps) {
   return (
     <div
-      className={`absolute transition-all duration-500 ease-out ${
-        isActive ? "scale-125 z-20" : "scale-100 z-10 opacity-60"
-      }`}
+      className="absolute transition-all duration-500 ease-out -translate-x-1/2 -translate-y-1/2"
       style={{ left: position.left, top: position.top }}
     >
-      <div
-        className={`relative w-[40px] h-[50px] ${
-          isActive ? "animate-bounce" : ""
-        }`}
-      >
-        <svg
-          width="40"
-          height="50"
-          viewBox="0 0 40 50"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className={`drop-shadow-lg transition-all duration-300 ${
-            isActive ? "drop-shadow-2xl" : ""
-          }`}
-        >
-          <path
-            d="M20 0C8.954 0 0 8.954 0 20c0 11.046 20 30 20 30s20-18.954 20-30C40 8.954 31.046 0 20 0z"
-            fill={isActive ? "#f4f1ea" : "#2b2b2b"}
-            stroke={isActive ? "#2b2b2b" : "#f4f1ea"}
-            strokeWidth="2"
-          />
-          <circle
-            cx="20"
-            cy="18"
-            r="8"
-            fill={isActive ? "#2b2b2b" : "#f4f1ea"}
-          />
-        </svg>
-        {isActive && (
-          <div className="absolute -inset-2 rounded-full bg-white/30 animate-ping" />
-        )}
-      </div>
+      {isActive ? (
+        // Selected state: Circle with house icon
+        <div className="relative">
+          <div className="w-[36px] h-[36px] md:w-[44px] md:h-[44px] bg-[#f4f1ea] rounded-full flex items-center justify-center shadow-lg border-2 border-[#2b2b2b] z-20 animate-bounce">
+            <svg className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 6L8 1.33333L14 6V13.3333C14 13.687 13.8595 14.0261 13.6095 14.2761C13.3594 14.5262 13.0203 14.6667 12.6667 14.6667H3.33333C2.97971 14.6667 2.64057 14.5262 2.39052 14.2761C2.14048 14.0261 2 13.687 2 13.3333V6Z" stroke="#2b2b2b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 14.6667V8H10V14.6667" stroke="#2b2b2b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className="absolute inset-0 rounded-full bg-[#2b2b2b]/20 animate-ping" />
+        </div>
+      ) : (
+        // Default state: Small dot
+        <div className="w-[12px] h-[12px] bg-[#2b2b2b] rounded-full border-2 border-[#f4f1ea] shadow-md opacity-80 hover:opacity-100 transition-opacity z-10" />
+      )}
     </div>
   );
 }
 
-// Hero Section Component with GSAP animations
+// Hero Section Component
 function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -732,59 +685,33 @@ function HeroSection() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Hero text animations
-      gsap.fromTo(
-        ".hero-label",
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.2 }
-      );
-
-      gsap.fromTo(
-        ".hero-name",
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: "power4.out", delay: 0.4 }
-      );
-
-      gsap.fromTo(
-        ".hero-line",
-        { scaleX: 0, transformOrigin: "left center" },
-        { scaleX: 1, duration: 1, ease: "power3.inOut", delay: 0.8 }
-      );
-
-      gsap.fromTo(
-        ".hero-tagline",
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 1 }
-      );
-
-      // Hero image animation
-      gsap.fromTo(
-        imageRef.current,
-        { scale: 1.1, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.4, ease: "power2.out", delay: 0.3 }
-      );
+      gsap.fromTo(".hero-label", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.2 });
+      gsap.fromTo(".hero-name", { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: "power4.out", delay: 0.4 });
+      gsap.fromTo(".hero-line", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 1, ease: "power3.inOut", delay: 0.8 });
+      gsap.fromTo(".hero-tagline", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: 1 });
+      gsap.fromTo(imageRef.current, { scale: 1.1, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4, ease: "power2.out", delay: 0.3 });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full max-w-[1440px] mx-auto flex items-center justify-between px-[64px]">
-      <div className="flex flex-col gap-[19px] w-[594px]">
-        <p className="hero-label font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] uppercase leading-[20px]">
+    <section ref={sectionRef} className="w-full max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-between px-[24px] md:px-[64px] gap-[40px] lg:gap-0">
+      <div className="flex flex-col gap-[16px] md:gap-[19px] w-full lg:w-[594px] order-2 lg:order-1">
+        <p className="hero-label font-geist font-normal text-[12px] md:text-[14px] text-[#2b2b2b] tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
           The Portfolio
         </p>
         <div className="overflow-hidden">
-          <h1 className="hero-name font-gilda text-[128px] text-[#2b2b2b] leading-[115.2px]">
+          <h1 className="hero-name font-gilda text-[56px] sm:text-[80px] md:text-[100px] lg:text-[128px] text-[#2b2b2b] leading-[1] md:leading-[115.2px]">
             Shannon Gillette
           </h1>
         </div>
-        <div className="hero-line w-[100px] h-px bg-[#2b2b2b]" />
-        <p className="hero-tagline font-geist font-light text-[20px] text-[#2b2b2b] leading-[32.5px] w-[450px]">
+        <div className="hero-line w-[60px] md:w-[100px] h-px bg-[#2b2b2b]" />
+        <p className="hero-tagline font-geist font-light text-[16px] md:text-[20px] text-[#2b2b2b] leading-[26px] md:leading-[32.5px] w-full md:w-[450px]">
           Data-driven marketing. Transparent communication. Exceptional results.
         </p>
       </div>
-      <div ref={imageRef} className="relative w-[658px] h-[718px] overflow-hidden">
+      <div ref={imageRef} className="relative w-full lg:w-[658px] aspect-[658/718] lg:h-[718px] overflow-hidden order-1 lg:order-2">
         <Image src={imgRectangle1} alt="Shannon Gillette" fill className="object-cover" unoptimized />
       </div>
     </section>
@@ -795,7 +722,6 @@ export default function PortfolioPage() {
   const [selectedListing, setSelectedListing] = useState<number | null>(1);
 
   useEffect(() => {
-    // Smooth scroll behavior
     document.documentElement.style.scrollBehavior = "smooth";
     
     return () => {
@@ -807,15 +733,15 @@ export default function PortfolioPage() {
     <div className="bg-[#f4f1ea] relative min-h-screen w-full overflow-x-hidden">
       {/* Header */}
       <FadeUp delay={0}>
-        <header className="w-full max-w-[1440px] mx-auto flex items-center justify-between px-[64px] py-[13px]">
-          <div className="relative w-[252px] h-[78px]">
+        <header className="w-full max-w-[1440px] mx-auto flex items-center justify-between px-[24px] md:px-[64px] py-[12px] md:py-[13px]">
+          <div className="relative w-[150px] md:w-[252px] h-[46px] md:h-[78px]">
             <Image src={imgQvrn6Gdeq84Zgkw0Rlji1} alt="Logo" fill className="object-contain object-left" unoptimized />
           </div>
-          <div className="flex gap-[12px] items-center">
-            <p className="font-dm-sans font-semibold text-[16px] text-[#1b2826] tracking-[1.6px] uppercase text-right leading-[24px]">
+          <div className="flex gap-[8px] md:gap-[12px] items-center">
+            <p className="font-dm-sans font-semibold text-[10px] md:text-[16px] text-[#1b2826] tracking-[1px] md:tracking-[1.6px] uppercase text-right leading-[14px] md:leading-[24px]">
               Powered by
             </p>
-            <div className="relative w-[57px] h-[18px]">
+            <div className="relative w-[40px] md:w-[57px] h-[12px] md:h-[18px]">
               <Image src={imgUnion} alt="Beacon" fill className="object-contain" unoptimized />
             </div>
           </div>
@@ -823,52 +749,52 @@ export default function PortfolioPage() {
       </FadeUp>
 
       {/* Main Content */}
-      <main className="w-full flex flex-col gap-[120px] items-center pt-[32px]">
+      <main className="w-full flex flex-col gap-[60px] md:gap-[120px] items-center pt-[24px] md:pt-[32px]">
         {/* Hero Section */}
         <HeroSection />
 
         {/* Market Insights Section */}
-        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[80px] px-[64px]">
-          <div className="flex flex-col gap-[24px] text-[#2b2b2b]">
+        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[40px] md:gap-[80px] px-[24px] md:px-[64px]">
+          <div className="flex flex-col gap-[16px] md:gap-[24px] text-[#2b2b2b]">
             <FadeUp>
-              <p className="font-geist font-normal text-[14px] tracking-[1px] uppercase leading-[20px]">
+              <p className="font-geist font-normal text-[12px] md:text-[14px] tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
                 Market Insights
               </p>
             </FadeUp>
-            <AnimatedHeading className="font-gilda text-[48px] leading-[56px]">
+            <AnimatedHeading className="font-gilda text-[32px] md:text-[48px] leading-[40px] md:leading-[56px]">
               Curating exceptional real estate
-              <br />
-              experiences through data and design.
+              <br className="hidden md:block" />
+              <span className="md:hidden"> </span>experiences through data and design.
             </AnimatedHeading>
           </div>
-          <div className="flex gap-[30px]">
+          <div className="flex flex-col md:flex-row gap-[32px] md:gap-[30px]">
             <StatCard
               value="998,820+"
               label="Total Views (Last 30 Days)"
-              badge="20x industry average • 89% from direct marketing"
+              badge="20x industry average"
               index={0}
             />
             <StatCard
               value="10"
               label="Active Listings"
-              badge="Each with comprehensive marketing portfolios"
+              badge="Comprehensive portfolios"
               index={1}
             />
             <StatCard
               value="42"
               label="Avg Days on Market"
-              badge="35% faster than market average"
+              badge="35% faster"
               index={2}
             />
           </div>
         </section>
 
         {/* Full Transparency Section - FULL WIDTH */}
-        <section className="w-full bg-[#2b2b2b] flex justify-center py-[128px]">
-          <div className="w-full max-w-[1600px] flex gap-[64px] px-[64px]">
+        <section className="w-full bg-[#2b2b2b] flex justify-center py-[60px] md:py-[128px]">
+          <div className="w-full max-w-[1600px] flex flex-col lg:flex-row gap-[40px] md:gap-[64px] px-[24px] md:px-[64px]">
             {/* Map Section */}
-            <ScaleReveal className="flex-1 relative min-h-[672px]">
-              <div className="relative w-full h-[672px] rounded-[8px] overflow-hidden">
+            <ScaleReveal className="flex-1 relative min-h-[300px] md:min-h-[672px]">
+              <div className="relative w-full h-[300px] md:h-[672px] rounded-[8px] overflow-hidden">
                 <Image src={imgRectangle2} alt="Map" fill className="object-cover" unoptimized />
                 
                 {/* Map Markers */}
@@ -880,9 +806,9 @@ export default function PortfolioPage() {
                   />
                 ))}
                 
-                {/* Home icon button in center */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] bg-black rounded-full flex items-center justify-center shadow-lg z-30">
-                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Home icon button */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[32px] h-[32px] md:w-[40px] md:h-[40px] bg-black rounded-full flex items-center justify-center shadow-lg z-30">
+                  <svg className="w-[16px] h-[16px] md:w-[20px] md:h-[20px]" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 6L8 1.33333L14 6V13.3333C14 13.687 13.8595 14.0261 13.6095 14.2761C13.3594 14.5262 13.0203 14.6667 12.6667 14.6667H3.33333C2.97971 14.6667 2.64057 14.5262 2.39052 14.2761C2.14048 14.0261 2 13.687 2 13.3333V6Z" stroke="white" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M6 14.6667V8H10V14.6667" stroke="white" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -891,15 +817,15 @@ export default function PortfolioPage() {
             </ScaleReveal>
 
             {/* Activity Feed */}
-            <FadeUp className="w-[632px] flex flex-col gap-[30px] relative" delay={0.3}>
-              <div className="flex flex-col gap-[30px] w-[554px]">
-                <h2 className="font-gilda text-[64px] text-white leading-[64px]">Full Transparency</h2>
-                <p className="font-geist font-normal text-[14px] text-white tracking-[1px] uppercase leading-[20px]">
+            <FadeUp className="w-full lg:w-[632px] flex flex-col gap-[24px] md:gap-[30px] relative" delay={0.3}>
+              <div className="flex flex-col gap-[16px] md:gap-[30px] w-full lg:w-[554px]">
+                <h2 className="font-gilda text-[36px] md:text-[64px] text-white leading-[40px] md:leading-[64px]">Full Transparency</h2>
+                <p className="font-geist font-normal text-[12px] md:text-[14px] text-white tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
                   Real-time view of our team&apos;s activity across all listings
                 </p>
-                <div className="w-[100px] h-px bg-white" />
+                <div className="w-[60px] md:w-[100px] h-px bg-white" />
               </div>
-              <div className="flex flex-col gap-[12px]">
+              <div className="flex flex-col gap-[8px] md:gap-[12px]">
                 {listings.map((listing) => (
                   <ActivityCard
                     key={listing.id}
@@ -912,39 +838,39 @@ export default function PortfolioPage() {
                 ))}
               </div>
               {/* Gradient overlay */}
-              <div className="absolute bottom-0 left-0 w-full h-[109px] bg-gradient-to-t from-[#2b2b2b] to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-full h-[80px] md:h-[109px] bg-gradient-to-t from-[#2b2b2b] to-transparent pointer-events-none" />
             </FadeUp>
           </div>
         </section>
 
         {/* Performance Section */}
-        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[64px] px-[64px]">
-          <div className="flex flex-col gap-[41px] items-center px-[130px] text-[#2b2b2b] text-center">
+        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[40px] md:gap-[64px] px-[24px] md:px-[64px]">
+          <div className="flex flex-col gap-[24px] md:gap-[41px] items-center px-0 md:px-[130px] text-[#2b2b2b] text-center">
             <FadeUp>
-              <p className="font-geist font-normal text-[14px] tracking-[1px] uppercase leading-[20px]">
+              <p className="font-geist font-normal text-[12px] md:text-[14px] tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
                 Performance
               </p>
             </FadeUp>
-            <AnimatedHeading className="font-gilda text-[64px] leading-[64px] w-[932px]">
+            <AnimatedHeading className="font-gilda text-[32px] md:text-[64px] leading-[40px] md:leading-[64px] w-full md:w-[932px]">
               Data-driven campaigns
-              <br />
-              delivering measurable results.
+              <br className="hidden md:block" />
+              <span className="md:hidden"> </span>delivering measurable results.
             </AnimatedHeading>
           </div>
 
           {/* Performance Stats Grid */}
-          <div className="flex border border-gray-100">
-            <PerformanceStat label="Total Reach" value="2.4M+" badge="Across all platforms" index={0} />
-            <PerformanceStat label="Engagements" value="231K" badge="Total interactions" index={1} />
-            <PerformanceStat label="Video Views" value="1.8M" badge="Across all content" index={2} />
-            <PerformanceStat label="All Campaigns" value="47" badge="Running this month" index={3} />
+          <div className="grid grid-cols-2 md:flex border border-gray-100">
+            <PerformanceStat label="Total Reach" value="2.4M+" badge="All platforms" index={0} />
+            <PerformanceStat label="Engagements" value="231K" badge="Interactions" index={1} />
+            <PerformanceStat label="Video Views" value="1.8M" badge="All content" index={2} />
+            <PerformanceStat label="Campaigns" value="47" badge="This month" index={3} />
           </div>
 
           {/* Social Platform Stats */}
-          <div className="flex gap-[30px]">
+          <div className="grid grid-cols-2 md:flex gap-[12px] md:gap-[30px]">
             <SocialPlatformCard
               icon={
-                <div className="relative w-[28px] h-[28px]">
+                <div className="relative w-[24px] h-[24px] md:w-[28px] md:h-[28px]">
                   <Image src={imgFrame2147224460} alt="Facebook" fill className="object-contain" unoptimized />
                 </div>
               }
@@ -954,7 +880,7 @@ export default function PortfolioPage() {
             />
             <SocialPlatformCard
               icon={
-                <div className="relative w-[28px] h-[28px] bg-[#ff850f] rounded-[5px] overflow-hidden">
+                <div className="relative w-[24px] h-[24px] md:w-[28px] md:h-[28px] bg-[#ff850f] rounded-[5px] overflow-hidden">
                   <Image src={imgInstagramLogo20162} alt="Instagram" fill className="object-cover" unoptimized />
                 </div>
               }
@@ -964,7 +890,7 @@ export default function PortfolioPage() {
             />
             <SocialPlatformCard
               icon={
-                <div className="relative w-[28px] h-[28px]">
+                <div className="relative w-[24px] h-[24px] md:w-[28px] md:h-[28px]">
                   <Image src={imgFrame2147224461} alt="TikTok" fill className="object-contain" unoptimized />
                 </div>
               }
@@ -974,7 +900,7 @@ export default function PortfolioPage() {
             />
             <SocialPlatformCard
               icon={
-                <div className="relative w-[28px] h-[28px] bg-[#d72228] rounded-[5px] overflow-hidden">
+                <div className="relative w-[24px] h-[24px] md:w-[28px] md:h-[28px] bg-[#d72228] rounded-[5px] overflow-hidden">
                   <Image src={imgFrame} alt="YouTube" fill className="object-contain" unoptimized />
                 </div>
               }
@@ -986,20 +912,20 @@ export default function PortfolioPage() {
         </section>
 
         {/* Recent Success Stories */}
-        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[120px] px-[64px]">
-          <div className="flex flex-col gap-[24px] items-center text-[#2b2b2b] text-center">
+        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[40px] md:gap-[120px] px-[24px] md:px-[64px]">
+          <div className="flex flex-col gap-[16px] md:gap-[24px] items-center text-[#2b2b2b] text-center">
             <FadeUp>
-              <p className="font-geist font-normal text-[14px] tracking-[1px] uppercase leading-[20px]">
+              <p className="font-geist font-normal text-[12px] md:text-[14px] tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
                 Recent Success Stories
               </p>
             </FadeUp>
-            <AnimatedHeading className="font-gilda text-[48px] leading-[56px] w-[855px]">
+            <AnimatedHeading className="font-gilda text-[28px] md:text-[48px] leading-[36px] md:leading-[56px] w-full md:w-[855px]">
               Each listing backed by comprehensive marketing portfolios
             </AnimatedHeading>
           </div>
 
-          {/* Property Grid - 3 per row */}
-          <div className="flex flex-wrap gap-x-[30px] gap-y-[68px] w-full">
+          {/* Property Grid - 1 col mobile, 2 col tablet, 3 col desktop */}
+          <div className="flex flex-col md:flex-row md:flex-wrap gap-[40px] md:gap-x-[30px] md:gap-y-[68px] w-full">
             <PropertyCard
               image={img112SparklingWaterCourt}
               price="$4,250,000"
@@ -1051,17 +977,17 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        {/* Reviews Section - FIXED LAYOUT */}
-        <section className="w-full bg-[#2b2b2b] flex flex-col gap-[64px] py-[128px] overflow-hidden">
+        {/* Reviews Section */}
+        <section className="w-full bg-[#2b2b2b] flex flex-col gap-[40px] md:gap-[64px] py-[60px] md:py-[128px] overflow-hidden">
           {/* Text Content */}
-          <div className="w-full max-w-[1440px] mx-auto px-[64px] flex flex-col gap-[32px]">
+          <div className="w-full max-w-[1440px] mx-auto px-[24px] md:px-[64px] flex flex-col gap-[20px] md:gap-[32px]">
             <FadeUp>
-              <p className="font-geist font-normal text-[12px] text-[#f4f1ea] tracking-[3.6px] uppercase leading-[16px]">
+              <p className="font-geist font-normal text-[10px] md:text-[12px] text-[#f4f1ea] tracking-[2px] md:tracking-[3.6px] uppercase leading-[14px] md:leading-[16px]">
                 AI Analysis of Client Reviews
               </p>
             </FadeUp>
-            <AnimatedHeading className="font-gilda text-[32px] text-[#f4f1ea] leading-[48px] max-w-[992px]">
-              Based on 47 verified reviews across Google and Zillow, Shannon consistently receives praise for her sophisticated marketing approach, transparent communication through Beacon reports, and ability to generate significantly higher visibility than competing agents. Clients specifically highlight her data-driven strategy, professional presentation materials, and the peace of mind that comes from seeing every marketing effort documented in real-time. Average rating: 4.9/5.0
+            <AnimatedHeading className="font-gilda text-[22px] md:text-[32px] text-[#f4f1ea] leading-[32px] md:leading-[48px] max-w-[992px]">
+              Based on 47 verified reviews across Google and Zillow, Shannon consistently receives praise for her sophisticated marketing approach, transparent communication through Beacon reports, and ability to generate significantly higher visibility than competing agents. Average rating: 4.9/5.0
             </AnimatedHeading>
           </div>
 
@@ -1070,22 +996,20 @@ export default function PortfolioPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[70px] items-center">
-          <div className="flex flex-col gap-[64px] items-center px-[64px]">
-            <div className="flex flex-col gap-[41px] items-center px-[130px] text-[#2b2b2b] text-center">
-              <FadeUp>
-                <p className="font-geist font-normal text-[14px] tracking-[1px] uppercase leading-[20px]">
-                  Ready for results like these?
-                </p>
-              </FadeUp>
-              <AnimatedHeading className="font-gilda text-[32px] leading-[40px] w-[932px]">
-                Experience marketing that&apos;s transparent, data-driven, and gets your home in front of serious buyers. Every campaign tracked. Every view documented. Every effort proven.
-              </AnimatedHeading>
-            </div>
+        <section className="w-full max-w-[1440px] mx-auto flex flex-col gap-[40px] md:gap-[70px] items-center px-[24px] md:px-[64px]">
+          <div className="flex flex-col gap-[24px] md:gap-[41px] items-center text-[#2b2b2b] text-center">
+            <FadeUp>
+              <p className="font-geist font-normal text-[12px] md:text-[14px] tracking-[1px] uppercase leading-[16px] md:leading-[20px]">
+                Ready for results like these?
+              </p>
+            </FadeUp>
+            <AnimatedHeading className="font-gilda text-[24px] md:text-[32px] leading-[32px] md:leading-[40px] w-full md:w-[932px]">
+              Experience marketing that&apos;s transparent, data-driven, and gets your home in front of serious buyers. Every campaign tracked. Every view documented. Every effort proven.
+            </AnimatedHeading>
           </div>
           <FadeUp>
-            <button className="bg-[#2b2b2b] w-[307px] h-[62px] flex items-center justify-center px-[27px] py-[21px] hover:bg-[#3b3b3b] transition-colors group">
-              <p className="font-geist font-medium text-[14px] text-white tracking-[1px] uppercase text-center leading-[20px] group-hover:tracking-[2px] transition-all duration-300">
+            <button className="bg-[#2b2b2b] w-full md:w-[307px] h-[56px] md:h-[62px] flex items-center justify-center px-[24px] md:px-[27px] py-[18px] md:py-[21px] hover:bg-[#3b3b3b] transition-colors group">
+              <p className="font-geist font-medium text-[13px] md:text-[14px] text-white tracking-[1px] uppercase text-center leading-[20px] group-hover:tracking-[2px] transition-all duration-300">
                 Let&apos;s Make Your Home Shine
               </p>
             </button>
@@ -1095,11 +1019,11 @@ export default function PortfolioPage() {
 
       {/* Footer */}
       <FadeUp>
-        <footer className="w-full max-w-[1052px] mx-auto flex flex-col gap-[22px] items-center py-[64px]">
-          <div className="relative w-[118px] h-[78px]">
+        <footer className="w-full max-w-[1052px] mx-auto flex flex-col gap-[16px] md:gap-[22px] items-center py-[40px] md:py-[64px] px-[24px]">
+          <div className="relative w-[80px] md:w-[118px] h-[52px] md:h-[78px]">
             <Image src={imgQvrn6Gdeq84Zgkw0Rlji1} alt="Logo" fill className="object-contain" unoptimized />
           </div>
-          <p className="font-geist font-normal text-[14px] text-[#2b2b2b] tracking-[1px] uppercase text-center leading-[20px]">
+          <p className="font-geist font-normal text-[11px] md:text-[14px] text-[#2b2b2b] tracking-[1px] uppercase text-center leading-[16px] md:leading-[20px]">
             All rights reserved. Gillette Group
           </p>
         </footer>
